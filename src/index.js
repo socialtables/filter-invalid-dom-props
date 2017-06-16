@@ -49,7 +49,11 @@ const eventProps = {
 };
 
 function isValidDOMProp(prop) {
-	return eventProps[prop] || htmlAttributes[prop];
+	return (
+		eventProps[prop] ||
+		htmlAttributes[prop] ||
+		/^(data|aria)-/.test(prop)
+	);
 }
 
 export default function filterInvalidDOMProps(props) {

@@ -72,7 +72,7 @@ workflows:
           context: st-global
           filters: *main-branch-only
           requires:
-            - build
+            - test
 
       - gh-release:
           context: st-global

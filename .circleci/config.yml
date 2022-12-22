@@ -1,0 +1,79 @@
+version: 2.1
+
+orbs:
+  sre: socialtables/sre-docker@4
+  gh: circleci/github-cli@2.1.0
+
+job-filters:
+  all-commits: &all-commits
+    branches:
+      only: /.*/
+    tags:
+      only: /^v.*/
+  main-branch-only: &main-branch-only
+    branches:
+      only:
+        - main
+  version-tags-only: &version-tags-only
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v.*/
+
+jobs:
+  test:
+    executor:
+      name: sre/circleci-docker
+      node-version: "14"
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Run tests
+          command: npm run test
+      - persist_to_workspace:
+          root: .
+          paths: ["."]
+
+  release:
+    executor:
+      name: sre/circleci-docker
+      node-version: "14"
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Release
+          command: npm run release
+
+  gh-release:
+    executor:
+      name: sre/circleci-docker
+      node-version: "14"
+    steps:
+      - checkout
+      - gh/install:
+          version: 2.11.3
+      - run:
+          name: Creating a Github Release
+          command: |
+            gh release create $CIRCLE_TAG -t "$CIRCLE_TAG" --generate-notes
+
+workflows:
+  cd-pipeline:
+    jobs:
+      - test:
+          context: st-global
+          filters: *all-commits
+
+      - release:
+          context: st-global
+          filters: *main-branch-only
+          requires:
+            - build
+
+      - gh-release:
+          context: st-global
+          filters: *version-tags-only

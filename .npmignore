@@ -1,1 +1,8 @@
 node_modules
+test
+.circleci
+.changeset
+
+.tool-versions
+.whitesource
+CODEOWNERS

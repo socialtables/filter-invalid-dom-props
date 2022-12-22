@@ -3,10 +3,13 @@
   "version": "2.0.0",
   "description": "a function to filter props that are not valid dom props when spreading props in an HOC in react",
   "main": "dist/index.js",
+  "types": "index.d.ts",
   "scripts": {
-    "test": "tape test/*.js",
     "build": "babel src --out-dir dist",
-    "prepublish": "npm run build"
+    "changeset": "changeset",
+    "prepublish": "npm run build",
+    "test": "tape test/*.js",
+    "release": "st-changeset release"
   },
   "repository": {
     "type": "git",
@@ -22,6 +25,8 @@
   "author": "Social Tables",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@changesets/cli": "^2.26.0",
+    "@socialtables/changesets": "^1.2.2",
     "babel-cli": "6.16.0",
     "babel-preset-es2015": "6.16.0",
     "babel-preset-stage-2": "6.17.0",

@@ -5,6 +5,11 @@ orbs:
   gh: circleci/github-cli@2.1.0
 
 job-filters:
+  all-commits: &all-commits
+    branches:
+      only: /.*/
+    tags:
+      only: /^v.*/
   main-branch-only: &main-branch-only
     branches:
       only:
@@ -16,6 +21,22 @@ job-filters:
       only: /^v.*/
 
 jobs:
+  test:
+    executor:
+      name: sre/circleci-docker
+      node-version: "14"
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Run tests
+          command: npm run test
+      - persist_to_workspace:
+          root: .
+          paths: ["."]
+
   release:
     executor:
       name: sre/circleci-docker
@@ -43,10 +64,13 @@ jobs:
 workflows:
   cd-pipeline:
     jobs:
+      - test:
+          filters: *all-commits
+
       - release:
-          context: st-global
           filters: *main-branch-only
+          requires:
+            - test
 
       - gh-release:
-          context: st-global
           filters: *version-tags-only

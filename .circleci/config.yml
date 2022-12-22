@@ -1,7 +1,6 @@
 version: 2.1
 
 orbs:
-  sre: socialtables/sre-docker@4
   gh: circleci/github-cli@2.1.0
 
 job-filters:
@@ -22,9 +21,8 @@ job-filters:
 
 jobs:
   test:
-    executor:
-      name: sre/circleci-docker
-      node-version: "14"
+    docker:
+      - image: cimg/node:14.19.1
     steps:
       - checkout
       - run:
@@ -38,9 +36,8 @@ jobs:
           paths: ["."]
 
   release:
-    executor:
-      name: sre/circleci-docker
-      node-version: "14"
+    docker:
+      - image: cimg/node:14.19.1
     steps:
       - attach_workspace:
           at: .
@@ -49,9 +46,8 @@ jobs:
           command: npm run release
 
   gh-release:
-    executor:
-      name: sre/circleci-docker
-      node-version: "14"
+    docker:
+      - image: cimg/node:14.19.1
     steps:
       - checkout
       - gh/install:

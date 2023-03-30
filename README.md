@@ -9,7 +9,7 @@ A simple helper function to filter out invalid dom properties. Useful when sprea
 ## Use
 
 ```js
-import filterInvalidDOMProps from "filter-invalid-dom-props";
+import filterInvalidDOMProps from "@socialtables/filter-invalid-dom-props";
 const properties = {
 	onClick: () => {},
 	value: "cool",

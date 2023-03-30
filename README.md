@@ -2,12 +2,14 @@
 
 [![CircleCI](https://circleci.com/gh/socialtables/filter-invalid-dom-props.svg?style=svg)](https://circleci.com/gh/socialtables/filter-invalid-dom-props)
 
+Formerly `filter-invalid-dom-props` on npm. Now `@socialtables/filter-invalid-dom-props`.
+
 A simple helper function to filter out invalid dom properties. Useful when spreading into at html element in react applications (and maybe for other things).
 
 ## Use
 
 ```js
-import filterInvalidDOMProps from "filter-invalid-dom-props";
+import filterInvalidDOMProps from "@socialtables/filter-invalid-dom-props";
 const properties = {
 	onClick: () => {},
 	value: "cool",

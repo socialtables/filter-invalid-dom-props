@@ -1,6 +1,6 @@
 {
   "name": "filter-invalid-dom-props",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "a function to filter props that are not valid dom props when spreading props in an HOC in react",
   "main": "dist/index.js",
   "types": "index.d.ts",

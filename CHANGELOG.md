@@ -1,5 +1,11 @@
 # filter-invalid-dom-props
 
+## 3.0.1
+
+### Patch Changes
+
+- 163853a: refactor: copy source code from html-attributes to remove stale dependency
+
 ## 3.0.0
 
 ### Major Changes

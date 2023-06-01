@@ -64,9 +64,11 @@ workflows:
           filters: *all-commits
 
       - release:
+          context: st-global
           filters: *main-branch-only
           requires:
             - test
 
       - gh-release:
+          context: st-global
           filters: *version-tags-only

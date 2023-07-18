@@ -115,6 +115,7 @@ const htmlAttributes = {
 	label: "label",
 	lang: "lang",
 	list: "list",
+	loading: "loading",
 	loop: "loop",
 	manifest: "manifest",
 	max: "max",
